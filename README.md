@@ -37,86 +37,50 @@ This repository is structured so that anyone can run in the pipeline locally.
 - SQL
 - Docker Desktop
 - Astro CLI
-- 
+
 ## How to run this project
-1. Clone the repository
-2. Create your .env file at the
+
+### 1. Clone the Repository
+```bash
+git clone 
+cd XKCD-ELT-Project
+```
+
+### 2. Configure Environment Variables
+Create a `.env` file in the db and airflow folder with the following variables:
+```env
 POSTGRES_USER=
 POSTGRES_PASSWORD=
 POSTGRES_DB=
 BASE_URL=
 PGADMIN_DEFAULT_EMAIL=
 PGADMIN_DEFAULT_PASSWORD=
-4. Inside the db folder, run docker compose up -d
-5. Inside the airflow folder run, astro dev start
-6. Go to http://localhost:8080/ and unpause comics_initial_load and trigger it manually once
-7. Unpause comics_incremental and now it will run based on sensor polling or schedule
+```
 
-## test
-1. Clone the Repository
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
-
-2. Create Your .env File
-
-Create a .env file with the following variables:
-
-POSTGRES_USER=
-POSTGRES_PASSWORD=
-POSTGRES_DB=
-BASE_URL=
-PGADMIN_DEFAULT_EMAIL=
-PGADMIN_DEFAULT_PASSWORD=
-
-3. Start PostgreSQL and PGAdmin
-
-From the db/ directory, run:
-
+### 3. Start the Database
+Navigate to the `db` folder and start the Docker containers:
+```bash
 cd db
-docker-compose up -d
+docker compose up -d
+```
 
-
-This starts:
-
-PostgreSQL at localhost:5440
-
-PGAdmin at localhost:5050
-
-4. Start Airflow
-
-From the airflow/ directory, run:
-
-cd ../airflow
+### 4. Start Airflow
+Navigate to the `airflow` folder and start the Astro development environment:
+```bash
+cd airflow
 astro dev start
+```
 
+### 5. Initialize the Data Pipeline
+1. Open your browser and go to http://localhost:8080/
+2. Find the `comics_initial_load` DAG and unpause it
+3. Trigger it manually once to perform the initial data load
 
-Airflow UI will be available at:
+### 6. Enable Incremental Updates
+Unpause the `comics_incremental` DAG. It will now run automatically based on sensor polling or the schedule.
 
-👉 http://localhost:8080/
+---
 
-5. Run the Initial Load Pipeline
-
-In the Airflow UI:
-
-Find the DAG comics_initial_load
-
-Unpause it
-
-Trigger it manually once
-
-This performs the full historical load and builds all dbt models.
-
-6. Enable Incremental Ingestion
-
-When the initial load completes:
-
-Unpause comics_incremental
-
-It will now run automatically based on:
-
-Sensor polling, or
-
-The CRON schedule you set
 ## Future enhancements
 - Implement multithreading to speed up initial load
 - Add CI/CD pipeline for changes to pipeline

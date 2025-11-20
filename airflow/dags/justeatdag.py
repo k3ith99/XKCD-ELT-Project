@@ -77,7 +77,7 @@ def initial_load():
 
 @dag(
     dag_id="comics_incremental",
-    schedule=None, #"*/2 * * * *",  # "0 8 * * 1,3,5",
+    schedule= "0 8 * * 1,3,5",
     max_active_runs=1,
     default_args=default_args,
     is_paused_upon_creation=False,

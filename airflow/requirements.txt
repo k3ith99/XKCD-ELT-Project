@@ -1,0 +1,11 @@
+pandas
+numpy
+pydantic
+requests
+psycopg2-binary
+sqlalchemy
+python-dotenv
+astronomer-cosmos>=1.4.3
+dbt-core~=1.8
+dbt-postgres~=1.8
+

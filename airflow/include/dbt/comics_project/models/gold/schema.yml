@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: gold_comics
+    description: Denormalized gold table with all comic data for analytics and reporting
+    columns:
+      - name: metrics_id
+        description: Unique metrics identifier from fact table
+        tests:
+          - unique
+          - not_null
+
+      - name: cost
+        description: Cost in euros (5 euros per letter in title)
+        tests:
+          - not_null
+
+      - name: views
+        description: Number of views
+        tests:
+          - not_null
+
+      - name: customer_reviews
+        description: Average customer review score
+
+      - name: title
+        description: Comic title
+        tests:
+          - not_null
+
+      - name: safe_title
+        description: URL-safe title
+
+      - name: transcript
+        description: Comic transcript
+
+      - name: alt_text
+        description: Alt text
+
+      - name: img_url
+        description: Image URL
+        tests:
+          - not_null
+
+      - name: news_text
+        description: News or additional information
+
+      - name: year
+        description: Publication year
+
+      - name: month
+        description: Publication month
+
+      - name: day
+        description: Publication day

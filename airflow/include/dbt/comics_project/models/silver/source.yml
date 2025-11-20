@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw comics data from API extraction
+    schema: public
+    tables:
+      - name: raw_comics
+        description: Raw XKCD comics data
+        columns:
+          - name: num
+            description: Comic number (primary key)
+            tests:
+              - unique
+              - not_null
+          - name: title
+            description: Comic title
+            tests:
+              - not_null
+          - name: year
+            description: Publication year
+            tests:
+              - not_null
+          - name: month
+            description: Publication month (1-12)
+            tests:
+              - not_null
+          - name: day
+            description: Publication day
+            tests:
+              - not_null
+          - name: safe_title
+            description: safe title
+          - name: img
+            description: image url for the comic
+          - name: alt
+            description: Alt text for the comics
+          - name: transcript
+            description: transcript text
+          - name: news
+            description: News text extracted from raw comics

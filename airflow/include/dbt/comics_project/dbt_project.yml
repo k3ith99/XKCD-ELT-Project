@@ -1,0 +1,20 @@
+name: 'comics_project'
+version: '1.0.0'
+config-version: 2
+
+profile: 'comics_project'
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  comics_project:
+    silver:
+      +materialized: table
+      +schema: silver
+    gold:
+      +materialized: table
+      +schema: gold

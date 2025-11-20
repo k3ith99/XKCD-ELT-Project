@@ -52,6 +52,71 @@ PGADMIN_DEFAULT_PASSWORD=
 6. Go to http://localhost:8080/ and unpause comics_initial_load and trigger it manually once
 7. Unpause comics_incremental and now it will run based on sensor polling or schedule
 
+## test
+1. Clone the Repository
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+
+2. Create Your .env File
+
+Create a .env file with the following variables:
+
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+BASE_URL=
+PGADMIN_DEFAULT_EMAIL=
+PGADMIN_DEFAULT_PASSWORD=
+
+3. Start PostgreSQL and PGAdmin
+
+From the db/ directory, run:
+
+cd db
+docker-compose up -d
+
+
+This starts:
+
+PostgreSQL at localhost:5440
+
+PGAdmin at localhost:5050
+
+4. Start Airflow
+
+From the airflow/ directory, run:
+
+cd ../airflow
+astro dev start
+
+
+Airflow UI will be available at:
+
+👉 http://localhost:8080/
+
+5. Run the Initial Load Pipeline
+
+In the Airflow UI:
+
+Find the DAG comics_initial_load
+
+Unpause it
+
+Trigger it manually once
+
+This performs the full historical load and builds all dbt models.
+
+6. Enable Incremental Ingestion
+
+When the initial load completes:
+
+Unpause comics_incremental
+
+It will now run automatically based on:
+
+Sensor polling, or
+
+The CRON schedule you set
 ## Future enhancements
 - Implement multithreading to speed up initial load
 - Add CI/CD pipeline for changes to pipeline
